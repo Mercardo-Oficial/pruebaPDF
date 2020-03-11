@@ -7,3 +7,8 @@
 {%capture titulo%}
 {{titulo_compuesto | split:'(' | last | split:')' | first}}
 {% endcapture %}
+
+
+{%capture nombre%}
+{{primer_nombre}} {{apellidos}}
+{% endcapture %}
