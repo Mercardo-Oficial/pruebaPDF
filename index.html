@@ -175,36 +175,35 @@
     </footer>
   </body>
   <script>
-    let url = new URL(window.location.href);
-    let nombre = url.searchParams.get("nombre")
-      ? url.searchParams.get("nombre")
-      : "N/A";
-    let titulo = url.searchParams.get("titulo")
-      ? url.searchParams.get("titulo")
-      : "N/A";
-    let autor = url.searchParams.get("autor")
-      ? url.searchParams.get("autor")
-      : "N/A";
-    let fecha = url.searchParams.get("fecha")
-      ? url.searchParams.get("fecha")
-      : "N/A";
-    let isbn = url.searchParams.get("isbn")
-      ? url.searchParams.get("isbn")
-      : "N/A";
-    let orden = url.searchParams.get("orden")
-      ? url.searchParams.get("orden")
-      : "N/A";
+    window.onload = () => {
+      let url = new URL(window.location.href);
+      let nombre = url.searchParams.get("nombre")
+        ? url.searchParams.get("nombre")
+        : "N/A";
+      let titulo = url.searchParams.get("titulo")
+        ? url.searchParams.get("titulo")
+        : "N/A";
+      let autor = url.searchParams.get("autor")
+        ? url.searchParams.get("autor")
+        : "N/A";
+      let fecha = url.searchParams.get("fecha")
+        ? url.searchParams.get("fecha")
+        : "N/A";
+      let isbn = url.searchParams.get("isbn")
+        ? url.searchParams.get("isbn")
+        : "N/A";
+      let orden = url.searchParams.get("orden")
+        ? url.searchParams.get("orden")
+        : "N/A";
 
-    document.querySelector("#nombre").innerText = nombre;
-    document.querySelector("#fecha").innerText = fecha;
-    document.querySelector("#titulo").innerText = titulo;
-    document.querySelector("#autor").innerText = autor;
-    document.querySelector("#isbn").innerText = isbn;
-    document.querySelector("#orden").innerText = orden;
-  </script>
+      document.querySelector("#nombre").innerText = nombre;
+      document.querySelector("#fecha").innerText = fecha;
+      document.querySelector("#titulo").innerText = titulo;
+      document.querySelector("#autor").innerText = autor;
+      document.querySelector("#isbn").innerText = isbn;
+      document.querySelector("#orden").innerText = orden;
 
-  <!-- ?nombre={{nombre-completo}}&fecha={{created_at}}&titulo={{titulo}}&autor={{autor}}&isbn={{ISBN-----------}}&orden={{order_number}} -->
-  <script>
-    window.print();
+      window.print();
+    };
   </script>
 </html>
