@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificado de Donación de Libro</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+      integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Kreon&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .flexbox-parent {
+        display: flex;
+      }
+      .flexbox-parent > img {
+        align-self: center;
+      }
+      body {
+        font-family: Roboto, Ubuntu, Arial, sans-serif;
+        font-size: 81.25%;
+      }
+      #title {
+        margin-top: 0;
+      }
+      .font-title,
+      li {
+        color: #1f3865;
+        font-family: "Amatic SC", cursive;
+        font-size: 4em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      li {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      li + p {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 1.25em;
+        margin: 3px;
+      }
+      .content {
+        width: 80%;
+        margin: auto;
+        height: 7.6in;
+      }
+      .subtitle {
+        font-family: "Kreon", serif;
+        color: #38b1f0;
+        font-size: 1em;
+        text-transform: capitalize;
+      }
+      .privacy-warning {
+        font-size: xx-small;
+        text-justify: auto;
+      }
+      #stop-img {
+        height: 7em;
+        position: fixed;
+        right: 7vw;
+      }
+      footer {
+        background-image: url("https://imgur.com/MHrpfNl.png");
+        background-repeat: no-repeat;
+        height: 1in;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="flexbox-parent">
+      <img
+        src="https://imgur.com/hoIhZbb.png"
+        style="width: 50vw;"
+        alt="Cengage Logo"
+      />
+      <img
+        src="https://imgur.com/lfVgNgw.png"
+        style="height: 5.5em;padding-left: 5em;"
+        alt="Myebooks Logo"
+      />
+    </header>
+    <div class="content">
+      <h1 id="title" class="font-title">
+        Certificado de donación de libro
+      </h1>
+
+      <ul>
+        <li>Institución</li>
+        <p>
+          Tecnológico de Estudio Superiores de Ecatepec
+        </p>
+        <li>Nombre del estudiante</li>
+        <p id="nombre">
+          {{nombre_estudiante}}
+        </p>
+        <li>Fecha</li>
+        <p id="fecha">
+          {{fecha_compra}}
+        </p>
+        <li>Titulo</li>
+        <p id="titulo">
+          {{libro_titulo}}
+        </p>
+        <!-- <li>Edicion</li>
+        <p>
+          {{libro_edicion}}
+        </p> -->
+        <li>Autor</li>
+        <p id="autor">
+          {{libro_autor}}
+        </p>
+        <li>ISBN</li>
+        <p id="isbn">
+          {{libro_isbn}}
+        </p>
+        <li>Número de Orden</li>
+        <p id="orden">
+          {{identificador_compra}}
+        </p>
+      </ul>
+      <h1 class="font-title subtitle">
+        Imprime este certificado y preséntalo en la biblioteca de la institución
+      </h1>
+      <hr />
+      <div class="privacy-warning">
+        <p>
+          <b>CENGAGE LEARNING EDITORES S.A. DE C.V.</b> con domicilio en Av.
+          Carretera México-Toluca 5420 Int. 2301, El Yaqui, Cuajimalpa, 05320,
+          México D.F. es responsable de recabar sus datos personales, el uso que
+          se les dé a los mismos, así como la protección de dichos datos. Su
+          información personal será utilizada para comunicación comercial en
+          general o para la atención de quejas y aclaraciones.
+        </p>
+        <p>
+          Para las finalidades antes mencionadas, requerimos de sus datos
+          generales. Usted tiene derecho a Acceder, Rectificar y Cancelar sus
+          datos personales, así como de oponerse al tratamiento de los mismos o
+          revocar el consentimiento que para tal fin nos otorgue, para lo cual
+          se puede poner en contacto en la siguiente dirección de correo:
+          <a href="mailto:aviso.privacidad@cengage.com"
+            >aviso.privacidad@cengage.com</a
+          >
+          . Se le recomienda que cada vez que realice cambios en sus datos, lo
+          haga de nuestro conocimiento.
+        </p>
+        <p>
+          Los datos serán tratados de conformidad con la
+          <b
+            >Ley Federal de Protección de Datos Personales en Posesión de
+            Particulares.</b
+          >
+        </p>
+      </div>
+    </div>
+    <footer>
+      <img
+        id="stop-img"
+        src="https://imgur.com/nOxtheU.png"
+        alt="Be Unstoppable"
+      />
+      <img />
+    </footer>
+  </body>
+  <script>
+    let url = new URL(window.location.href);
+    let nombre = url.searchParams.get("nombre")
+      ? url.searchParams.get("nombre")
+      : "N/A";
+    let titulo = url.searchParams.get("titulo")
+      ? url.searchParams.get("titulo")
+      : "N/A";
+    let titulo = url.searchParams.get("autor")
+      ? url.searchParams.get("autor")
+      : "N/A";
+    let fecha = url.searchParams.get("fecha")
+      ? url.searchParams.get("fecha")
+      : "N/A";
+    let isbn = url.searchParams.get("isbn")
+      ? url.searchParams.get("isbn")
+      : "N/A";
+    let orden = url.searchParams.get("orden")
+      ? url.searchParams.get("orden")
+      : "N/A";
+
+    document.querySelector("#nombre").innerText = nombre;
+    document.querySelector("#fecha").innerText = fecha;
+    document.querySelector("#titulo").innerText = titulo;
+    document.querySelector("#autor").innerText = autor;
+    document.querySelector("#isbn").innerText = isbn;
+    document.querySelector("#orden").innerText = orden;
+  </script>
+
+  <!-- ?nombre={{nombre-completo}}&fecha={{created_at}}&titulo={{titulo}}&autor={{autor}}&isbn={{ISBN-----------}}&orden={{order_number}} -->
+  <script>
+    window.print();
+  </script>
+</html>
