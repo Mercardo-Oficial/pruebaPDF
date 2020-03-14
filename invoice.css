@@ -1,0 +1,62 @@
+.flexbox-parent {
+  display: flex;
+}
+.flexbox-parent > img {
+  align-self: center;
+}
+body {
+  font-family: Roboto, Ubuntu, Arial, sans-serif;
+  font-size: 81.25%;
+}
+.font-title,
+li {
+  color: #1f3865;
+  font-family: "Amatic SC", cursive;
+  font-size: 3em;
+  text-align: center;
+  text-transform: uppercase;
+}
+li {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+li + p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 2em;
+}
+.content {
+  width: 80%;
+  margin: auto;
+  height: 7.6in;
+}
+.subtitle {
+  font-family: "Kreon", serif;
+  color: #38b1f0;
+  font-size: 1em;
+  text-transform: capitalize;
+}
+.privacy-warning {
+  font-size: xx-small;
+  text-justify: auto;
+}
+#stop-img {
+  height: 9em;
+  position: fixed;
+  right: 7vw;
+  bottom: 0;
+  z-index: 90;
+}
+footer {
+  height: 1in;
+  position: absolute;
+  bottom: 1in;
+}
+.blue-foot {
+  width: 100vw;
+  height: 2em;
+  bottom: 0;
+  position: fixed;
+}
