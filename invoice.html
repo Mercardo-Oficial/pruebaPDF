@@ -56,7 +56,12 @@ parent%} {{order.billing_address.first_name}}
       {{order.name}}
     </p>
   </ul>
-
+  {%if student.size <= 3%}
+  <small>
+    <sup>*</sup>Nombre de alumno no encontrado, favor de entrar en contacto con
+    soporte técnico
+  </small>
+  {%endif%}
   <h1 class="font-title subtitle">
     Imprime este certificado y preséntalo en la biblioteca de la institución
   </h1>
