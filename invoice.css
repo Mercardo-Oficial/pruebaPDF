@@ -6,7 +6,10 @@
 }
 body {
   font-family: Roboto, Ubuntu, Arial, sans-serif;
-  font-size: 81.25%;
+  font-size: 61.25%;
+}
+.font-title {
+  padding: 1em;
 }
 .font-title,
 li {
@@ -35,7 +38,7 @@ li + p {
 .subtitle {
   font-family: "Kreon", serif;
   color: #38b1f0;
-  font-size: 1em;
+  font-size: 1.8em;
   text-transform: capitalize;
 }
 .privacy-warning {
@@ -45,18 +48,7 @@ li + p {
 #stop-img {
   height: 9em;
   position: fixed;
-  right: 7vw;
-  bottom: 0;
+  right: 5vw;
+  bottom: -10px;
   z-index: 90;
-}
-footer {
-  height: 1in;
-  position: absolute;
-  bottom: 1in;
-}
-.blue-foot {
-  width: 100vw;
-  height: 2em;
-  bottom: 0;
-  position: fixed;
 }

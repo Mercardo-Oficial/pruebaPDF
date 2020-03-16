@@ -1,3 +1,8 @@
+{% assign item = order.line_items[0]%} {%capture student%}
+{{item.properties.Nombre}} {{item.properties.Apellido}} {%endcapture%} {%capture
+parent%} {{order.billing_address.first_name}}
+{{order.billing_address.last_name}}<sup>*</sup> {%endcapture%}
+
 <header class="flexbox-parent">
   <img
     src="https://github.com/gogvale/pruebaPDF/raw/master/logos/cengage.png"
@@ -21,34 +26,37 @@
       Tecnológico de Estudio Superiores de Ecatepec
     </p>
     <li>Nombre del estudiante</li>
+
     <p id="nombre">
-      {{order.billing_address.first_name}} {{order.billing_address.last_name}}
+      {%if student.size > 3%} {{student}} {%else%} {{parent}} {%endif%}
     </p>
     <li>Fecha</li>
     <p id="fecha">
       {{ order.created_at | date: "D/M/Y" }}
     </p>
 
-    {% for item in order.line_items%} {% if forloop.first == true %}
     <li>Titulo</li>
     <p id="titulo">
       {{item.name | split: '(' | first }}
     </p>
+    <!-- Only shows if there's parenthesis on title -->
+    {% assign myarray = item.name | split '(' %} {% if myarray.size > 1 %}
     <li>Autor</li>
     <p id="autor">
       {{ item.name | split:'(' | last | split:')' | first }}
     </p>
-    {%endif%} {%endfor%}
-
+    {% endif%}
     <li>ISBN</li>
     <p id="isbn">
-      {{ item.sku | default:"N/D" }}
+      {{ item.sku | split:'_' | first | default:"N/D" }}
     </p>
+
     <li>Número de Orden</li>
     <p id="orden">
       {{order.name}}
     </p>
   </ul>
+
   <h1 class="font-title subtitle">
     Imprime este certificado y preséntalo en la biblioteca de la institución
   </h1>
