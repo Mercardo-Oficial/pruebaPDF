@@ -1,0 +1,139 @@
+{
+  "id": 4600223694921,
+  "title": "ADMINISTRACIÓN DE EQUIPOS HUMANOS (Louffat, Enrique)",
+  "price": "0.00",
+  "line_price": "0.00",
+  "quantity": 1,
+  "sku": "9789871954094_tese",
+  "grams": 0,
+  "properties": [
+    ["Nombre", "adas"],
+    ["Apellido", "asdada"]
+  ],
+  "vendor": "VitalSource",
+  "requires_shipping": false,
+  "applied_discounts": [],
+  "tax_lines": [
+    {
+      "tax_line": {
+        "title": "VAT",
+        "price": "0.00",
+        "rate": 0.16,
+        "price_set": {
+          "shop_money": { "amount": "0.00", "currency_code": "MXN" },
+          "presentment_money": { "amount": "0.00", "currency_code": "MXN" }
+        }
+      }
+    }
+  ],
+  "taxable": true,
+  "gift_card": false,
+  "variant_id": 12437930147913,
+  "variant": {
+    "id": 12437930147913,
+    "product_id": 1424679469129,
+    "title": "Default Title",
+    "price": "0.00",
+    "sku": "9789871954094_tese",
+    "position": 1,
+    "inventory_policy": "deny",
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": "shopify",
+    "option1": "Default Title",
+    "option2": null,
+    "option3": null,
+    "created_at": "2018-08-05T21:51:16-05:00",
+    "updated_at": "2020-03-15T21:28:00-06:00",
+    "taxable": true,
+    "barcode": "",
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "kg",
+    "inventory_quantity": 0,
+    "old_inventory_quantity": 0,
+    "tax_code": "",
+    "requires_shipping": false
+  },
+  "url": "/products/9789871954094?variant=12437930147913",
+  "product": {
+    "id": 1424679469129,
+    "title": "ADMINISTRACIÓN DE EQUIPOS HUMANOS (Louffat, Enrique)",
+    "body_html": "\u003ch3\u003e\u003cspan style=\"color: #ff2a00;\"\u003e\u003cstrong\u003e\u003cem\u003eProducto exclusivo para donación al Tecnológico de Estudios Superiores de Ecatepec\u003c/em\u003e\u003c/strong\u003e\u003c/span\u003e\u003c/h3\u003e\n\u003ctable width=\"542\"\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eTítulo:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003eAdministración de equipos humanos\u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eEditorial:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003eCengage Learning\u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eAutor:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003eLouffat, Enrique \u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eAño:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003e2013\u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eEdición:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003e1\u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eFormato:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003eDigital\u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd width=\"95\"\u003e\n\u003cp\u003e\u003cstrong\u003eISBN:\u003c/strong\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003ctd width=\"441\"\u003e\u003cstrong\u003e9789871954094\u003c/strong\u003e\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e",
+    "vendor": "VitalSource",
+    "product_type": "Digital",
+    "created_at": "2018-08-05T21:51:16-05:00",
+    "handle": "9789871954094",
+    "updated_at": "2020-03-15T21:30:19-06:00",
+    "published_at": "2020-03-13T10:02:27-06:00",
+    "template_suffix": "tese",
+    "published_scope": "web",
+    "tags": "tese",
+    "variants": [
+      {
+        "id": 12437930147913,
+        "product_id": 1424679469129,
+        "title": "Default Title",
+        "price": "0.00",
+        "sku": "9789871954094_tese",
+        "position": 1,
+        "inventory_policy": "deny",
+        "compare_at_price": "",
+        "fulfillment_service": "manual",
+        "inventory_management": "shopify",
+        "option1": "Default Title",
+        "option2": null,
+        "option3": null,
+        "created_at": "2018-08-05T21:51:16-05:00",
+        "updated_at": "2020-03-15T21:28:00-06:00",
+        "taxable": true,
+        "barcode": "",
+        "grams": 0,
+        "image_id": null,
+        "weight": 0.0,
+        "weight_unit": "kg",
+        "inventory_quantity": 0,
+        "old_inventory_quantity": 0,
+        "tax_code": "",
+        "requires_shipping": false
+      }
+    ],
+    "options": [
+      {
+        "id": 1879322493001,
+        "product_id": 1424679469129,
+        "name": "Title",
+        "position": 1,
+        "values": ["Default Title"]
+      }
+    ],
+    "images": [
+      {
+        "id": 13687216799817,
+        "product_id": 1424679469129,
+        "position": 1,
+        "created_at": "2020-03-06T16:54:04-06:00",
+        "updated_at": "2020-03-06T16:54:04-06:00",
+        "alt": null,
+        "width": 1153,
+        "height": 1495,
+        "src": "https://cdn.shopify.com/s/files/1/1248/5011/products/page_1_2b5690a7-4ea5-4c5f-9522-5fb2e49daded.jpg?v=1583535244",
+        "variant_ids": []
+      }
+    ],
+    "image": {
+      "id": 13687216799817,
+      "product_id": 1424679469129,
+      "position": 1,
+      "created_at": "2020-03-06T16:54:04-06:00",
+      "updated_at": "2020-03-06T16:54:04-06:00",
+      "alt": null,
+      "width": 1153,
+      "height": 1495,
+      "src": "https://cdn.shopify.com/s/files/1/1248/5011/products/page_1_2b5690a7-4ea5-4c5f-9522-5fb2e49daded.jpg?v=1583535244",
+      "variant_ids": []
+    }
+  },
+  "fulfillment": null
+}
