@@ -11,7 +11,8 @@ Representa la estructura capturada para un cliente test en la plataforma de Shop
 
 ## [generarCertificado.liquid](generarCertificado.liquid)
 Código utilizado en el checkout para enseñar un botón verde (ejemplo abajo) que lleva a la liga de generación de certificado al concluir la compra de un libro por parte de un cliente.
-
+<html>
+<body>
 <style>
   button {
     margin-top: 25px;
@@ -29,3 +30,5 @@ Código utilizado en el checkout para enseñar un botón verde (ejemplo abajo) q
   }
 </style>
 <button id="certificate">Generar Certificado</button>
+</body>
+</html>
