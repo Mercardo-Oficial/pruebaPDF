@@ -164,10 +164,6 @@
         ? url.searchParams.get("orden")
         : "N/A";
 
-      document.querySelector("#nombre").innerText = nombre;
-      document.querySelector("#fecha").innerText = fecha;
-      document.querySelector("#orden").innerText = orden;
-
       const ul = document.querySelector("#list");
       libros.forEach((book) => {
         let li = document.createElement("li");
