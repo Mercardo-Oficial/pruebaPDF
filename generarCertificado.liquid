@@ -59,7 +59,7 @@
             <a target="_blank"
                 href="https://mercadro-oficial.github.io/pruebaPDF/?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ item.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}">
                 <button id="certificate">Generar Certificado</button>
-            </a>
+            </a> - {{titulo}}
         {%else%}
             {% capture downloads %}
                 {% for line in line_items %}
