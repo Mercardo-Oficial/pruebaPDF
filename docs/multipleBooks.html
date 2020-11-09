@@ -165,7 +165,7 @@
         : "N/A";
 
       const ul = document.querySelector("#list");
-      libros.forEach((book) => {
+      libros.forEach((line_item) => {
         let li = document.createElement("li");
         li.innerHTML = book.join(" - ");
         ul.appendChild(li);
