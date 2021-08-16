@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado v2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<style>
+    .flexbox-parent {
+        display: flex;
+        justify-content: space-between;
+      }
+      .flexbox-parent > img {
+        align-self: center;
+        height: 10em;
+      }
+      body {
+        font-family: Roboto, Ubuntu, Arial, sans-serif;
+        font-size: 81.25%;
+        width: 80vw;
+        margin: auto;
+      }
+      #title {
+        font-size: 3.25em;
+        margin-top: 0;
+        margin-bottom: 0;
+        color: #f70018;
+        font-family: 'Bebas Neue', cursive;
+      }
+      .font-title,
+      li {
+        /* color: #1f3865; */
+        font-family: 'Bebas Neue', cursive;
+        font-size: 2em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      li {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      li + p {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 1.25em;
+        margin: 3px;
+      }
+      .content {
+        width: 80%;
+        margin: auto;
+        height: 5.4in;
+      }
+      .subtitle {
+        font-family: "Kreon", serif;
+        color: #38b1f0;
+        font-size: 1em;
+        text-transform: capitalize;
+      }
+      footer {
+        text-align: justify;
+      }
+      #pie_titulo {
+        font-size: 0.88em !important;
+      }
+</style>
+<body>
+    <header class="flexbox-parent">
+        <img src="./logos_new/mcgraw_logo.jpg" alt="McGrawHill Logo" />
+        <img
+          src="./logos/myebooks.png"
+          style="height: 5.5em;padding-left: 5em;"
+          alt="Myebooks Logo"
+        />
+      </header>
+    <div class="content">
+        <h1 id="title" class="font-title">
+          Certificado de donación de libro
+        </h1>
+
+        <ul>
+          <li>Institución</li>
+          <p id="institucion">
+            {{institucion}}
+          </p>
+          <li>Nombre del estudiante</li>
+          <p id="nombre">
+            {{nombre_estudiante}}
+          </p>
+          <li>Fecha</li>
+          <p id="fecha">
+            {{fecha_compra}}
+          </p>
+          <li>Titulo</li>
+          <p id="titulo">
+            {{libro_titulo}}
+          </p>
+          <!-- <li>Edicion</li>
+          <p>
+            {{libro_edicion}}
+          </p> -->
+          <li>Autor</li>
+          <p id="autor">
+            {{libro_autor}}
+          </p>
+          <li>ISBN</li>
+          <p id="isbn">
+            {{libro_isbn}}
+          </p>
+          <li>Número de Orden</li>
+          <p id="orden">
+            {{identificador_compra}}
+          </p>
+        </ul>
+      </div>
+    <footer id="pie">
+        <div id="pie_titulo">
+            <h2>Imprime este certificado y preséntalo en la biblioteca de la institución</h2>
+        </div>
+        <div id="pie_mensaje">
+            <p>
+                <strong>McGraw Hill Interamericana Editores, S.A. de C.V.</strong> con domicilio en Prolg. 
+                Paseo de la Reforma 1015 Torre A Piso 17, Santa Fé, CP 01376, Álvaro Obregón, Ciudad de 
+                México responsable de recabar sus datos personales, el uso que se les dé a los mismos, así 
+                como la protección de dichos datos. Su in formación personal será utilizada para comunicación 
+                comercial en general o para la atención de quejas y aclaraciones.
+            </p>
+            <p>
+                Para las finalidades antes mencionadas, requerimos de sus datos generales. Usted tiene derecho a 
+                Acceder, Rectificar y Cancelar sus datos personales, así como de oponerse al tratamiento de los 
+                mismos o revocar el consentimiento que para tal fin nos otorgue, para lo cual se puede poner en 
+                contacto en la siguiente dirección de correo: 
+                <a href="mail:toprivacy@mheducation.com">privacy@mheducation.com</a>. Se le recomienda que cada
+                vez que realice cambios en sus datos, lo haga de nuestro conocimiento.
+            </p>
+            <p>
+                Los datos serán tratados de conformidad con la <b>Ley Federal de Protección de Datos Personales 
+                en Posesión de Particulares.</b>
+            </p>
+        </div>
+    </footer>
+</body>
+<script>
+    window.onload = () => {
+      let url = new URL(window.location.href);
+      let nombre = url.searchParams.get("nombre")
+        ? url.searchParams.get("nombre")
+        : "N/A";
+      let titulo = url.searchParams.get("titulo")
+        ? url.searchParams.get("titulo")
+        : "N/A";
+      let autor = url.searchParams.get("autor")
+        ? url.searchParams.get("autor")
+        : "N/A";
+      let fecha = url.searchParams.get("fecha")
+        ? url.searchParams.get("fecha")
+        : "N/A";
+      let isbn = url.searchParams.get("isbn")
+        ? url.searchParams.get("isbn")
+        : "N/A";
+      let orden = url.searchParams.get("orden")
+        ? url.searchParams.get("orden")
+        : "N/A";
+      let institucion = url.searchParams.get("institucion")
+        ? url.searchParams.get("institucion")
+        : "N/A";
+
+      document.querySelector("#nombre").innerText = nombre;
+      document.querySelector("#fecha").innerText = fecha;
+      document.querySelector("#titulo").innerText = titulo;
+      document.querySelector("#autor").innerText = autor;
+      document.querySelector("#isbn").innerText = isbn;
+      document.querySelector("#orden").innerText = orden;
+      document.querySelector("#institucion").innerText = institucion;
+
+      window.print();
+    };
+  </script>
+</html>
