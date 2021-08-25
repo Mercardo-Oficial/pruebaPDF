@@ -166,9 +166,9 @@
       let orden = url.searchParams.get("orden")
         ? url.searchParams.get("orden")
         : "N/A";
-      let institucion = url.searchParams.get("institucion")
-        ? url.searchParams.get("institucion")
-        : "N/A";
+      <!-- let institucion = url.searchParams.get("institucion")-->
+        <!--? url.searchParams.get("institucion")-->
+        <!--: "N/A"; -->
 
       document.querySelector("#nombre").innerText = nombre;
       document.querySelector("#fecha").innerText = fecha;
@@ -176,7 +176,7 @@
       document.querySelector("#autor").innerText = autor;
       document.querySelector("#isbn").innerText = isbn;
       document.querySelector("#orden").innerText = orden;
-      document.querySelector("#institucion").innerText = institucion;
+      <!--document.querySelector("#institucion").innerText = institucion; -->
 
       window.print();
     };
