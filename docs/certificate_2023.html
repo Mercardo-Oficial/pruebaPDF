@@ -103,10 +103,12 @@
         <p id="titulo">
           {{libro_titulo}}
         </p>
+        <!-- 
         <li>Edicion</li>
         <p id="edicion">
           {{libro_edicion}}
         </p>
+         -->
         <li>Autor</li>
         <p id="autor">
           {{libro_autor}}
@@ -145,9 +147,11 @@
       let titulo = url.searchParams.get("titulo")
         ? url.searchParams.get("titulo")
         : "N/A";
+      /*
       let edicion = url.searchParams.get("edicion")
       ? url.searchParams.get("edicion")
       : "N/A";
+      */
       let autor = url.searchParams.get("autor")
         ? url.searchParams.get("autor")
         : "N/A";
@@ -165,7 +169,7 @@
       document.querySelector("#nombre").innerText = nombre;
       document.querySelector("#fecha").innerText = fecha;
       document.querySelector("#titulo").innerText = titulo;
-      document.querySelector("#edicion").innerText = edicion;
+      // document.querySelector("#edicion").innerText = edicion;
       document.querySelector("#autor").innerText = autor;
       document.querySelector("#isbn").innerText = isbn;
       document.querySelector("#orden").innerText = orden;
