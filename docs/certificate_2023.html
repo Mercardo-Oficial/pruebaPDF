@@ -95,6 +95,10 @@
         <p id="nombre">
           {{nombre_estudiante}}
         </p>
+        <li>Numero de boleta</li>
+        <p id="boleta">
+          {{boleta}}
+        </p>
         <li>Fecha</li>
         <p id="fecha">
           {{fecha_compra}}
@@ -144,6 +148,9 @@
       let nombre = url.searchParams.get("nombre")
         ? url.searchParams.get("nombre")
         : "N/A";
+      let boleta = url.searchParams.get("boleta")
+        ? url.searchParams.get("boleta")
+        : "N/A";
       let titulo = url.searchParams.get("titulo")
         ? url.searchParams.get("titulo")
         : "N/A";
@@ -167,6 +174,7 @@
 
       document.querySelector("#institucion").innerText = institucion;
       document.querySelector("#nombre").innerText = nombre;
+      document.querySelector("#boleta").innerText = boleta;
       document.querySelector("#fecha").innerText = fecha;
       document.querySelector("#titulo").innerText = titulo;
       // document.querySelector("#edicion").innerText = edicion;

@@ -108,9 +108,10 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                           {%capture autor%}{{ line.title | split:'(' | last | split:')' | first }}{%endcapture%}
                           {%capture edicion%}{{ line.product_description | split:'Edicion:' | last | split:'Formato' | first | strip_newlines }}{%endcapture%}
                           {% if line.product.tags contains 'Donacion de libros IPN' %}
+                            {%capture boleta%}{{line_item.properties.Boleta}}{%endcapture%}
                             <li>
                               <a target="_blank"
-                                  href="https://mercadro-oficial.github.io/pruebaPDF/certificate_2023.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}"
+                                  href="https://mercadro-oficial.github.io/pruebaPDF/certificate_2023.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}&boleta={{boleta}}"
                                 >Descargar Certificado (IPN) - {{titulo}}</a>
                             </li>
                           {% elsif line.product.tags contains 'McGraw-Hill-Cer' %}
