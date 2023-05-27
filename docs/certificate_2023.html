@@ -1,196 +1,219 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Certificado de Donación de Libro</title>
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Kreon&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      .flexbox-parent {
-        display: flex;
-        justify-content: space-around;
-        margin: 0 2em;
-      }
-      .flexbox-parent > img {
-        align-self: center;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificado de Donación de Libro</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Kreon&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet" />
+  <style>
+    .flexbox-parent {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 2em;
+    }
+
+    .flexbox-parent>img {
+      align-self: center;
+    }
+
+    body {
+      font-family: Roboto, Ubuntu, Arial, sans-serif;
+      font-size: 81.25%;
+    }
+
+    #title {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-weight: unset;
+    }
+
+    .font-title,
+    li {
+      color: #1f3865;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 3.5em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    li {
+      font-size: 1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    li+p {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-size: 1.25em;
+      margin: 3px;
+      /* margin-bottom: 1em; */
+    }
+
+    .content {
+      /* margin: auto; */
+      margin-top: 10em;
+      height: 70vh;
+    }
+
+    .subtitle {
+      font-family: "Kreon", serif;
+      color: inherit;
+      font-size: 1em;
+      text-transform: capitalize;
+    }
+
+    .privacy-warning {
+      font-size: xx-small;
+      text-justify: auto;
+    }
+
+    #stop-img {
+      height: 7em;
+      position: fixed;
+      right: 7vw;
+    }
+
+    #vigencia {
+      text-align: center;
+      font-family: "Amatic SC", cursive;
+    }
+
+    @media print {
+
+      html,
       body {
-        font-family: Roboto, Ubuntu, Arial, sans-serif;
-        font-size: 81.25%;
+        height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
       }
-      #title {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-weight: unset;
-      }
-      .font-title,
-      li {
-        color: #1f3865;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 3.5em;
-        text-align: center;
-        text-transform: uppercase;
-      }
-      li {
-        font-size: 1em;
-        text-align: left;
-        text-transform: uppercase;
-      }
-      li + p {
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-        font-size: 1.25em;
-        margin: 3px;
-        /* margin-bottom: 1em; */
-      }
-      .content {
-         /* margin: auto; */
-        margin-top: 10em; 
-        height: 6.7in;
-      }
-      .subtitle {
-        font-family: "Kreon", serif;
-        color: inherit;
-        font-size: 1em;
-        text-transform: capitalize;
-      }
-      .privacy-warning {
-        font-size: xx-small;
-        text-justify: auto;
-      }
-      #stop-img {
-        height: 7em;
-        position: fixed;
-        right: 7vw;
-      }
-      #vigencia {
-        text-align: center;
-        font-family: "Amatic SC", cursive;
-      }
-      @media print {
-        html, body {
-          height:100%; 
-          margin: 0 !important; 
-          padding: 0 !important;
-          overflow: hidden;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="content">
-      <h1 id="title" class="font-title">
-        Certificado de <br> donación
-      </h1>
-      <h2 id="vigencia">
-        <img style="height: 1em; width: 50%;" src="./logos/Blue-Line-PNG-Image-Background.png" alt="blueline">
-      </h2>
+    }
+    @page {
+      size: auto;
+      /* auto is the initial value */
+      margin: 0mm;
+      /* this affects the margin in the printer settings */
+    }
+    html {
+      background-color: #FFFFFF;
+      margin: 0px;
+      /* this affects the margin on the html before sending to printer */
+    }
+    body {
+      /* border: solid 1px blue; */
+      margin: 10mm 15mm 10mm 15mm;
+      /* margin you want for the content */
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1 id="title" class="font-title">
+      Certificado de <br> donación
+    </h1>
+    <h2 id="vigencia">
+      <img style="height: 1em; width: 50%;" src="./logos/Blue-Line-PNG-Image-Background.png" alt="blueline">
+    </h2>
 
-      <ul>
-        <li>Institución</li>
-        <p id="institucion">
-          {{institucion}}
-        </p>
-        <li>Nombre del estudiante</li>
-        <p id="nombre">
-          {{nombre_estudiante}}
-        </p>
-        <li>Numero de boleta</li>
-        <p id="boleta">
-          {{boleta}}
-        </p>
-        <li>Fecha</li>
-        <p id="fecha">
-          {{fecha_compra}}
-        </p>
-        <li>Titulo</li>
-        <p id="titulo">
-          {{libro_titulo}}
-        </p>
-        <!-- 
+    <ul>
+      <li>Institución</li>
+      <p id="institucion">
+        {{institucion}}
+      </p>
+      <li>Nombre del estudiante</li>
+      <p id="nombre">
+        {{nombre_estudiante}}
+      </p>
+      <li>Numero de boleta</li>
+      <p id="boleta">
+        {{boleta}}
+      </p>
+      <li>Fecha</li>
+      <p id="fecha">
+        {{fecha_compra}}
+      </p>
+      <li>Titulo</li>
+      <p id="titulo">
+        {{libro_titulo}}
+      </p>
+      <!-- 
         <li>Edicion</li>
         <p id="edicion">
           {{libro_edicion}}
         </p>
          -->
-        <li>Autor</li>
-        <p id="autor">
-          {{libro_autor}}
-        </p>
-        <li>ISBN</li>
-        <p id="isbn">
-          {{libro_isbn}}
-        </p>
-        <li>Número de Orden</li>
-        <p id="orden">
-          {{identificador_compra}}
-        </p>
-      </ul>
-      <h1 class="font-title subtitle">
-        Imprime este certificado y preséntalo en la biblioteca de la institución
-      </h1>
-    </div>
-    <header class="flexbox-parent">
-      <img src="./logos/mgh.png" style="height: 10vh;" alt="Cengage Logo" />
-      <img
-        src="./logos/myebooks.png"
-        style="height: 5.5em;padding-left: 5em;"
-        alt="Myebooks Logo"
-      />
-    </header>
-    <img style="height: 30%; position: absolute; top: 0; left: 0" src="./logos/newTopBorder.png" alt="top-border">
-    <img style="height: 30%; position: absolute; bottom: 0; right: 0; transform: rotate(180deg)" src="./logos/newTopBorder.png" alt="bottom-border">
-  </body>
-  <script>
-    window.onload = () => {
-      let url = new URL(window.location.href);
-      let institucion = "Escuela Superior de Economía del IPN";
-      let nombre = url.searchParams.get("nombre")
-        ? url.searchParams.get("nombre")
-        : "N/A";
-      let boleta = url.searchParams.get("boleta")
-        ? url.searchParams.get("boleta")
-        : "N/A";
-      let titulo = url.searchParams.get("titulo")
-        ? url.searchParams.get("titulo")
-        : "N/A";
-      /*
-      let edicion = url.searchParams.get("edicion")
-      ? url.searchParams.get("edicion")
+      <li>Autor</li>
+      <p id="autor">
+        {{libro_autor}}
+      </p>
+      <li>ISBN</li>
+      <p id="isbn">
+        {{libro_isbn}}
+      </p>
+      <li>Número de Orden</li>
+      <p id="orden">
+        {{identificador_compra}}
+      </p>
+    </ul>
+    <h1 class="font-title subtitle">
+      Imprime este certificado y preséntalo en la biblioteca de la institución
+    </h1>
+  </div>
+  <header class="flexbox-parent">
+    <img src="./logos/mgh.png" style="height: 10vh;" alt="Cengage Logo" />
+    <img src="./logos/myebooks.png" style="height: 5.5em;padding-left: 5em;" alt="Myebooks Logo" />
+  </header>
+  <img style="height: 30%; position: absolute; top: 0; left: 0" src="./logos/newTopBorder.png" alt="top-border">
+  <img style="height: 30%; position: absolute; bottom: 0; right: 0; transform: rotate(180deg)"
+    src="./logos/newTopBorder.png" alt="bottom-border">
+</body>
+<script>
+  window.onload = () => {
+    let url = new URL(window.location.href);
+    let institucion = "Escuela Superior de Economía del IPN";
+    let nombre = url.searchParams.get("nombre")
+      ? url.searchParams.get("nombre")
       : "N/A";
-      */
-      let autor = url.searchParams.get("autor")
-        ? url.searchParams.get("autor")
-        : "N/A";
-      let fecha = url.searchParams.get("fecha")
-        ? url.searchParams.get("fecha")
-        : "N/A";
-      let isbn = url.searchParams.get("isbn")
-        ? url.searchParams.get("isbn")
-        : "N/A";
-      let orden = url.searchParams.get("orden")
-        ? url.searchParams.get("orden")
-        : "N/A";
+    let boleta = url.searchParams.get("boleta")
+      ? url.searchParams.get("boleta")
+      : "N/A";
+    let titulo = url.searchParams.get("titulo")
+      ? url.searchParams.get("titulo")
+      : "N/A";
+    /*
+    let edicion = url.searchParams.get("edicion")
+    ? url.searchParams.get("edicion")
+    : "N/A";
+    */
+    let autor = url.searchParams.get("autor")
+      ? url.searchParams.get("autor")
+      : "N/A";
+    let fecha = url.searchParams.get("fecha")
+      ? url.searchParams.get("fecha")
+      : "N/A";
+    let isbn = url.searchParams.get("isbn")
+      ? url.searchParams.get("isbn")
+      : "N/A";
+    let orden = url.searchParams.get("orden")
+      ? url.searchParams.get("orden")
+      : "N/A";
 
-      document.querySelector("#institucion").innerText = institucion;
-      document.querySelector("#nombre").innerText = nombre;
-      document.querySelector("#boleta").innerText = boleta;
-      document.querySelector("#fecha").innerText = fecha;
-      document.querySelector("#titulo").innerText = titulo;
-      // document.querySelector("#edicion").innerText = edicion;
-      document.querySelector("#autor").innerText = autor;
-      document.querySelector("#isbn").innerText = isbn;
-      document.querySelector("#orden").innerText = orden;
+    document.querySelector("#institucion").innerText = institucion;
+    document.querySelector("#nombre").innerText = nombre;
+    document.querySelector("#boleta").innerText = boleta;
+    document.querySelector("#fecha").innerText = fecha;
+    document.querySelector("#titulo").innerText = titulo;
+    // document.querySelector("#edicion").innerText = edicion;
+    document.querySelector("#autor").innerText = autor;
+    document.querySelector("#isbn").innerText = isbn;
+    document.querySelector("#orden").innerText = orden;
 
-      window.print();
-    };
-  </script>
+    window.print();
+  };
+</script>
+
 </html>
