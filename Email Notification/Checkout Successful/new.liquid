@@ -84,12 +84,8 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                       <td>
                         <h2>{{ email_title }}</h2>
                         {% assign line_item = order.line_items[0]%}
-                        {%capture student%}
-                        {{line_item.properties.Nombre}} {{line_item.properties.Apellido}} 
-                        {%endcapture%}
-                        {%capture parent%} 
-                        {{order.billing_address.first_name}}{{order.billing_address.last_name}}<sup>*</sup>
-                        {%endcapture%}
+                        {%capture student%}{{line_item.properties.Nombre}} {{line_item.properties.Apellido}} {%endcapture%}
+                        {%capture parent%}{{order.billing_address.first_name}}{{order.billing_address.last_name}}<sup>*</sup>{%endcapture%}
                         <ul>
                           {% for line in order.line_items %}
                           {% if line.product.tags contains 'tese' %}
