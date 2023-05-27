@@ -49,7 +49,7 @@
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
         font-size: 1.25em;
         margin: 3px;
-        /* margin-bottom: 1em; */
+        margin-bottom: 1em;
       }
       .content {
          /* margin: auto; */
@@ -180,15 +180,15 @@
         ? url.searchParams.get("orden")
         : "N/A";
 
-      document.querySelector("#institucion").innerText = "institucion";
-      document.querySelector("#nombre").innerText = "nombre";
-      document.querySelector("#boleta").innerText = "boleta";
-      document.querySelector("#fecha").innerText = "fecha";
-      document.querySelector("#titulo").innerText = "titulo";
-      // document.querySelector("#edicion").innerText = "edicion";
-      document.querySelector("#autor").innerText = "autor";
-      document.querySelector("#isbn").innerText = "isbn";
-      document.querySelector("#orden").innerText = "orden";
+      document.querySelector("#institucion").innerText = institucion;
+      document.querySelector("#nombre").innerText = nombre;
+      document.querySelector("#boleta").innerText = boleta;
+      document.querySelector("#fecha").innerText = fecha;
+      document.querySelector("#titulo").innerText = titulo;
+      // document.querySelector("#edicion").innerText = edicion;
+      document.querySelector("#autor").innerText = autor;
+      document.querySelector("#isbn").innerText = isbn;
+      document.querySelector("#orden").innerText = orden;
 
       window.print();
     };
