@@ -1,42 +1,70 @@
 {% capture email_title %} {{ order.receiver_first_name }} Gracias por tu compra a través de nuestra página. Siempre puedes responder a este correo para cualquier duda. ¡Estamos para servirte! {% endcapture %}
-{% for line in line_items %}
-{% if line.product.tags contains 'Colegios' %}
-Esta compra se entrega directamente a través del colegio. Una vez hecho tu pago a través de nuestro portal, no es necesario solicitar la entrega. Con los datos obtenidos del alumno nuestro equipo entregará el material al inicio de clases.
-{% endif %}
-{% endfor%}
-{% capture email_body %} Nuestro equipo está trabajando en procesar tu orden.<br>
-{% for line in line_items %}
-{% if line.product.tags contains 'tese' %}
-Realiza los siguientes pasos para la entrega de tu certificado:<br>
-1.Da click en Descargar Certificado.<br>
-2.Imprime tu certificado.<br>
-3.Presentalo en el TESE.<br>
-{% else %}
-{% if line.product.tags contains 'Entrega' %}
-Tu libro será entregado en un máximo de 3 días hábiles en tu campus y podrás recogerlo con una identificación.
-{% else %}
-Si compraste con nosotros un producto digital, se te enviará en un correo aparte un número de licencia y un tutorial que explica cómo utilizar el producto. Por favor revisa tu bandeja de correos no deseados si acaso no encuentras el correo. Si después de ver la bandeja de no deseados, aún no encuentras tu licencia, ponte en contacto con nosotros para asesorarte.
-{% endif %}
-{% endif %}
-{% endfor%}
-{% endcapture %}
-<!DOCTYPE html>
-<html lang="es">
+  {% for line in line_items %}
+  {% if line.product.tags contains 'Colegios' %}
+  Esta compra se entrega directamente a través del colegio. Una vez hecho tu pago a través de nuestro portal, no es
+  necesario solicitar la entrega. Con los datos obtenidos del alumno nuestro equipo entregará el material al inicio de
+  clases.
+  {% endif %}
+  {% endfor%}
+  {% capture email_body %} Nuestro equipo está trabajando en procesar tu orden.<br>
+  {% for line in line_items %}
+  {% if line.product.tags contains 'tese' %}
+  Realiza los siguientes pasos para la entrega de tu certificado:<br>
+  1.Da click en Descargar Certificado.<br>
+  2.Imprime tu certificado.<br>
+  3.Presentalo en el TESE.<br>
+  {% else %}
+  {% if line.product.tags contains 'Entrega' %}
+  Tu libro será entregado en un máximo de 3 días hábiles en tu campus y podrás recogerlo con una identificación.
+  {% else %}
+  Si compraste con nosotros un producto digital, se te enviará en un correo aparte un número de licencia y un tutorial que
+  explica cómo utilizar el producto. Por favor revisa tu bandeja de correos no deseados si acaso no encuentras el correo.
+  Si después de ver la bandeja de no deseados, aún no encuentras tu licencia, ponte en contacto con nosotros para
+  asesorarte.
+  {% endif %}
+  {% endif %}
+  {% endfor%}
+  {% endcapture %}
+  <!DOCTYPE html>
+  <html lang="es">
+  
   <head>
     <title>{{ email_title }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
     <style>
-      .button__cell { background: {{ shop.email_accent_color }}; }
-      a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+      .button__cell {
+        background: {
+            {
+            shop.email_accent_color
+          }
+        }
+  
+        ;
+      }
+  
+      a,
+      a:hover,
+      a:active,
+      a:visited {
+        color: {
+            {
+            shop.email_accent_color
+          }
+        }
+  
+        ;
+      }
     </style>
   </head>
+  
   <body>
     {% comment %}
     Este es el código para mostrar ENTREGA EGADE (debe ir en el asunto del correo):
     {% for line in line_items %}
-    {% if line.product.tags contains 'Entrega' %} Libro para entrega a: {% for p in line.properties %}{% unless p.last == blank %} - {{ p.first }}: {{ p.last }}{% endunless %}{% endfor %}
+    {% if line.product.tags contains 'Entrega' %} Libro para entrega a: {% for p in line.properties %}{% unless p.last ==
+    blank %} - {{ p.first }}: {{ p.last }}{% endunless %}{% endfor %}
     {% endif %}
     {% endfor%}
     {% endcomment %}
@@ -54,7 +82,8 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                           <tr>
                             <td class="shop-name__cell">
                               {% if shop.email_logo_url %}
-                              <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                              <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}"
+                                width="{{ shop.email_logo_width }}">
                               {% else %}
                               <h1 class="shop-name__text">
                                 <a href="{{shop.url}}">{{ shop.name }}</a>
@@ -84,403 +113,429 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                       <td>
                         <h2>{{ email_title }}</h2>
                         {% assign line_item = order.line_items[0]%}
-                        {%capture student%}
-                        {{line_item.properties.Nombre}} {{line_item.properties.Apellido}} 
-                        {%endcapture%}
-                        {%capture parent%} 
-                        {{order.billing_address.first_name}}{{order.billing_address.last_name}}<sup>*</sup>
-                        {%endcapture%}
-                        <ul>
-                          {% for line in order.line_items %}
-                          {% if line.product.tags contains 'tese' %}
-                          {%capture titulo%}{{line.title | split: '(' | first }}{%endcapture%}
-                          {%capture autor%}{{ line.title | split:'(' | last | split:')' | first }}{%endcapture%}
-                          <li>
-                            <a target="_blank"
-                                href="https://mercadro-oficial.github.io/pruebaPDF/?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}"
-                              >Descargar Certificado - {{titulo}}</a>
-                          </li>
-                          {% endif %}
-                          {% endfor %}
-
-                          {% for line in order.line_items %}
-                          {%capture titulo%}{{line.title | split: '(' | first }}{%endcapture%}
-                          {%capture autor%}{{ line.title | split:'(' | last | split:')' | first }}{%endcapture%}
-                          {% if line.product.tags contains 'McGraw-Hill-Cer' %}
-                          <li>
-                            <a target="_blank"
-                                href="https://mercadro-oficial.github.io/pruebaPDF/new_certificate.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}"
-                              >Descargar Certificado - {{titulo}}</a>
-                          </li>
-                          {% endif %}
-                          {% endfor %}
-
-                        </ul>
-                        {% for transaction in transactions %}
-                        {% if transaction.gateway contains 'Depósito Bancario o Transferencia en BBVA Bancomer' %}
-                        {% assign my_variable = true %} 
-                        <p style="background-color:#ffff99;"> Atención: Importante 
-                          enviarnos el comprobante de pago (foto de la ficha de depósito o captura de pantalla de la transferencia electrónica) para marcar su orden como "pagada" y mandarle su licencia.</p>
-                        {% endif %}
-                        {% if transaction.gateway contains 'Paga en efectivo en Oxxo' %} 
-                        <p style="background-color:#ffff99;">Importante: Para completar el proceso es necesario acudir a un Oxxo con la boleta de pago que se le proporcionó en un correo aparte. Sus accesos no serán envidados sino hasta recibir su pago.</p>
-                        {% endif %}
-                        {% if transaction.gateway contains 'Paga con SPEI' %} 
-                        <p style="background-color:#ffff99;">Importante: Para completar el proceso es necesario realizar el pago por medio de SPEI con la CLABE de pago que se le proporcionó en un correo aparte. Sus accesos no serán envidados sino hasta recibir su pago.</p>
-                        {% endif %}
-                        {% if transaction.gateway contains 'Pago referenciado Banorte' %} 
-                        <p style="background-color:#ffff99;">Importante: Para completar el proceso es necesario realizar el pago por medio de un banco Banorte con la referencia de pago que se le proporcionó en un correo aparte. Sus accesos no serán envidados sino hasta recibir su pago.</p>
-                        {% endif %}     
-                        {% endfor%}
-                        <p>{{ email_body }}</p>
-                        <table class="row actions">
-                          <tr>
-                            <td class="actions__cell">
-                              <table class="button main-action-cell">
-                                <tr>
-                                  <td class="button__cell"><a href="{{ shop.url }}" class="button__text">Visita nuestra tienda</a></td>
-                                </tr>
-                                <td><br>
+                          {%capture student%}{{line_item.properties.Nombre}} {{line_item.properties.Apellido}} {%endcapture%}
+                          {%capture parent%}{{order.billing_address.first_name}}{{order.billing_address.last_name}}<sup>*</sup>{%endcapture%}
+                          <ul>
+                            {% for line in order.line_items %}
+                            {% if line.product.tags contains 'tese' %}
+                            {%capture titulo%}{{line.title | split: '(' | first }}{%endcapture%}
+                            {%capture autor%}{{ line.title | split:'(' | last | split:')' | first }}{%endcapture%}
+                            <li>
+                              <a target="_blank"
+                                href="https://mercadro-oficial.github.io/pruebaPDF/?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "
+                                %d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D"
+                                }}&orden={{order.name | split:'#' | last}}">Descargar Certificado - {{titulo}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                          
+                            {% for line in order.line_items %}
+                            {%capture titulo%}{{line.title | split: '(' | first }}{%endcapture%}
+                            {%capture autor%}{{ line.title | split:'(' | last | split:')' | first }}{%endcapture%}
+                            {%capture edicion%}{{ line.product_description | split:'Edicion:' | last | split:'Formato' | first | strip_newlines
+                            }}{%endcapture%}
+                            {% if line.product.tags contains 'Donacion de libros IPN' %}
+                            {%capture boleta%}{{line_item.properties.Boleta}}{%endcapture%}
+                            <li>
+                              <a target="_blank"
+                                href="https://mercadro-oficial.github.io/pruebaPDF/certificate_2023.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "
+                                %d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D"
+                                }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}&boleta={{boleta}}">Descargar Certificado (IPN) -
+                                {{titulo}}</a>
+                            </li>
+                            {% elsif line.product.tags contains 'McGraw-Hill-Cer' %}
+                            <li>
+                              <a target="_blank"
+                                href="https://mercadro-oficial.github.io/pruebaPDF/new_certificate.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "
+                                %d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D"
+                                }}&orden={{order.name | split:'#' | last}}">Descargar Certificado - {{titulo}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            
+                            </ul>
+                            {% for transaction in transactions %}
+                            {% if transaction.gateway contains 'Depósito Bancario o Transferencia en BBVA Bancomer' %}
+                            {% assign my_variable = true %}
+                            <p style="background-color:#ffff99;"> Atención: Importante
+                              enviarnos el comprobante de pago (foto de la ficha de depósito o captura de pantalla de la transferencia electrónica)
+                              para marcar su orden como "pagada" y mandarle su licencia.</p>
+                            {% endif %}
+                            {% if transaction.gateway contains 'Paga en efectivo en Oxxo' %}
+                            <p style="background-color:#ffff99;">Importante: Para completar el proceso es necesario acudir a un Oxxo con la boleta
+                              de pago que se le proporcionó en un correo aparte. Sus accesos no serán envidados sino hasta recibir su pago.</p>
+                            {% endif %}
+                            {% if transaction.gateway contains 'Paga con SPEI' %}
+                            <p style="background-color:#ffff99;">Importante: Para completar el proceso es necesario realizar el pago por medio de
+                              SPEI con la CLABE de pago que se le proporcionó en un correo aparte. Sus accesos no serán envidados sino hasta recibir
+                              su pago.</p>
+                            {% endif %}
+                            {% if transaction.gateway contains 'Pago referenciado Banorte' %}
+                            <p style="background-color:#ffff99;">Importante: Para completar el proceso es necesario realizar el pago por medio de un
+                              banco Banorte con la referencia de pago que se le proporcionó en un correo aparte. Sus accesos no serán envidados sino
+                              hasta recibir su pago.</p>
+                            {% endif %}
+                            {% endfor%}
+                            <p>{{ email_body }}</p>
+                            <table class="row actions">
+                              <tr>
+                                <td class="actions__cell">
+                                  <table class="button main-action-cell">
+                                    <tr>
+                                      <td class="button__cell"><a href="{{ shop.url }}" class="button__text">Visita nuestra tienda</a></td>
+                                    </tr>
+                                    <td><br>
+                                    </td>
+                                    <tr>
+                                      <td class="button__cell"><a href="https://www.myebooks.com/pages/factura-tu-compra"
+                                          class="button__text">Factura tu pedido</a></td>
+                                    </tr>
+                                  </table>
+                                  <table class="link secondary-action-cell">
+                                    <tr>
+                                    </tr>
+                                  </table>
                                 </td>
-                                <tr>
-                                  <td class="button__cell"><a href="https://www.myebooks.com/pages/factura-tu-compra" class="button__text">Factura tu pedido</a></td>
-                                </tr>
-                              </table>
-                              <table class="link secondary-action-cell">
-                                <tr>
-                                </tr>
-                              </table>
+                              </tr>
+                            </table>
                             </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </center>
-              </td>
-            </tr>
-          </table>
-          <table class="row section">
-            <tr>
-              <td class="section__cell">
-                <center>
-                  <table class="container">
-                    <tr>
-                      <td>
-                        <h3>Resumen de la orden</h3>
-                      </td>
-                    </tr>
-                    {% assign my_variable_cuenta = false %}
-                    {% for line in line_items %}
-                    {% if line.product.title contains 'World History' %}
-                    {% assign my_variable_cuenta = true %}
-                    {% endif %}   
-                    {% endfor%}
-                    {% if my_variable_cuenta == true  %}
-                    <tr>
-                      <td>
-                        <p style="background-color: #ffff99; color: black;">Nota:  La entrega del producto de World History no es automática. Nuestro equipo ya está generando tu cuenta (usuario y contraseña) y lo recibirás al día hábil siguiente.</p>
-                      </td>
-                    </tr>
-                    <br>
-                    {% else %}
-                    <br>
-                    {% endif %}
-                  </table>
-                  <table class="container">
-                    <tr>
-                      <td>
-                        <table class="row">
-                          {% for line in line_items %}
-                          {% if item_count == 1 %}
-                          {% assign columnWrapperClass = 'order-list__item--single' %}
-                          {% elsif forloop.first == true %}
-                          {% assign columnWrapperClass = 'order-list__item--first' %}
-                          {% elsif forloop.last == true %}
-                          {% assign columnWrapperClass = 'order-list__item--last' %}
-                          {% else %}
-                          {% assign columnWrapperClass = '' %}
-                          {% endif %}
-                          <tr class="order-list__item {{columnWrapperClass}}">
-                            <td class="order-list__item__cell">
-                              <table>
-                                <td>
-                                  {% if line.image %}
-                                  <img src="{{ line | img_url: 'compact_cropped' }}" align="left" width="60" height="60" class="order-list__product-image"/>
-                                  {% endif %}
-                                </td>
-                                <td class="order-list__product-description-cell">
-                                  <span class="order-list__item-title"> {{ line.title }}{% for p in line.properties %}{% unless p.last == blank %} - {{ p.first }}: {{ p.last }}{% endunless %}{% endfor %} × {{ line.quantity }}</span><br/>
-                                  {% if line.variant.title != 'Default Title' %}
-                                  <span class="order-list__item-variant">{{ line.variant.title }}</span>
-                                  {% endif %}
-                                </td>
-                                <td class="order-list__price-cell">
-                                  {% if line.original_line_price != line.line_price %}
-                                  <del class="order-list__item-original-price">{{ line.original_line_price | money }}</del>
-                                  {% endif %}
-                                  <p class="order-list__item-price">{{ line.price | money }}</p>
-                                </td>
-                              </table>
+                            </tr>
+                            </table>
+                            </center>
                             </td>
-                          </tr>
-                          {% endfor %}
-                        </table>
-                        <table class="row subtotal-lines">
-                          <tr>
-                            <td class="subtotal-spacer"></td>
-                            <td>
-                              <table class="row subtotal-table">
-                                {% if discounts.first.code %}
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Discount ({{ discounts.first.code }})</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>{{ discounts_savings | money }}</strong>
-                                  </td>
-                                </tr>
-                                {% endif %}
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Subtotal</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>{{ subtotal_price | money }}</strong>
-                                  </td>
-                                </tr>
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Costo de envío</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>{{ shipping_price | money }}</strong>
-                                  </td>
-                                </tr>
-                                {% for line in tax_lines %}
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>{{ line.title }}</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>{{ line.price | money }}</strong>
-                                  </td>
-                                </tr>
-                                {% endfor %}
-                              </table>
-                              <table class="row subtotal-table subtotal-table--total">
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Total</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>{{ total_price | money_with_currency }}</strong>
-                                  </td>
-                                </tr>
-                              </table>
-                              {% if my_variable == true %}
-                              <table class="row section">
-                                <tr>
-                                  <td class="section__cell">
-                                    <center>
-                                      <table class="container">
-                                        <tr>
-                                          <td>
-                                            <h3>Información para el depósito</h3>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                      <table class="row">
-                                        <tr>
-                                          <h4>Banco: BBVA Bancomer</h4>
+                            </tr>
+                            </table>
+                            <table class="row section">
+                              <tr>
+                                <td class="section__cell">
+                                  <center>
+                                    <table class="container">
+                                      <tr>
+                                        <td>
+                                          <h3>Resumen de la orden</h3>
+                                        </td>
+                                      </tr>
+                                      {% assign my_variable_cuenta = false %}
+                                      {% for line in line_items %}
+                                      {% if line.product.title contains 'World History' %}
+                                      {% assign my_variable_cuenta = true %}
+                                      {% endif %}
+                                      {% endfor%}
+                                      {% if my_variable_cuenta == true %}
+                                      <tr>
+                                        <td>
+                                          <p style="background-color: #ffff99; color: black;">Nota: La entrega del producto de World History no es
+                                            automática. Nuestro equipo ya está generando tu cuenta (usuario y contraseña) y lo recibirás al día
+                                            hábil siguiente.</p>
+                                        </td>
+                                      </tr>
+                                      <br>
+                                      {% else %}
+                                      <br>
+                                      {% endif %}
+                                    </table>
+                                    <table class="container">
+                                      <tr>
+                                        <td>
+                                          <table class="row">
+                                            {% for line in line_items %}
+                                            {% if item_count == 1 %}
+                                            {% assign columnWrapperClass = 'order-list__item--single' %}
+                                            {% elsif forloop.first == true %}
+                                            {% assign columnWrapperClass = 'order-list__item--first' %}
+                                            {% elsif forloop.last == true %}
+                                            {% assign columnWrapperClass = 'order-list__item--last' %}
+                                            {% else %}
+                                            {% assign columnWrapperClass = '' %}
+                                            {% endif %}
+                                            <tr class="order-list__item {{columnWrapperClass}}">
+                                              <td class="order-list__item__cell">
+                                                <table>
+                                                  <td>
+                                                    {% if line.image %}
+                                                    <img src="{{ line | img_url: 'compact_cropped' }}" align="left" width="60" height="60"
+                                                      class="order-list__product-image" />
+                                                    {% endif %}
+                                                  </td>
+                                                  <td class="order-list__product-description-cell">
+                                                    <span class="order-list__item-title"> {{ line.title }}{% for p in line.properties %}{% unless
+                                                      p.last == blank %} - {{ p.first }}: {{ p.last }}{% endunless %}{% endfor %} × {{ line.quantity
+                                                      }}</span><br />
+                                                    {% if line.variant.title != 'Default Title' %}
+                                                    <span class="order-list__item-variant">{{ line.variant.title }}</span>
+                                                    {% endif %}
+                                                  </td>
+                                                  <td class="order-list__price-cell">
+                                                    {% if line.original_line_price != line.line_price %}
+                                                    <del class="order-list__item-original-price">{{ line.original_line_price | money }}</del>
+                                                    {% endif %}
+                                                    <p class="order-list__item-price">{{ line.price | money }}</p>
+                                                  </td>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                            {% endfor %}
+                                          </table>
+                                          <table class="row subtotal-lines">
+                                            <tr>
+                                              <td class="subtotal-spacer"></td>
+                                              <td>
+                                                <table class="row subtotal-table">
+                                                  {% if discounts.first.code %}
+                                                  <tr class="subtotal-line">
+                                                    <td class="subtotal-line__title">
+                                                      <p>
+                                                        <span>Discount ({{ discounts.first.code }})</span>
+                                                      </p>
+                                                    </td>
+                                                    <td class="subtotal-line__value">
+                                                      <strong>{{ discounts_savings | money }}</strong>
+                                                    </td>
+                                                  </tr>
+                                                  {% endif %}
+                                                  <tr class="subtotal-line">
+                                                    <td class="subtotal-line__title">
+                                                      <p>
+                                                        <span>Subtotal</span>
+                                                      </p>
+                                                    </td>
+                                                    <td class="subtotal-line__value">
+                                                      <strong>{{ subtotal_price | money }}</strong>
+                                                    </td>
+                                                  </tr>
+                                                  <tr class="subtotal-line">
+                                                    <td class="subtotal-line__title">
+                                                      <p>
+                                                        <span>Costo de envío</span>
+                                                      </p>
+                                                    </td>
+                                                    <td class="subtotal-line__value">
+                                                      <strong>{{ shipping_price | money }}</strong>
+                                                    </td>
+                                                  </tr>
+                                                  {% for line in tax_lines %}
+                                                  <tr class="subtotal-line">
+                                                    <td class="subtotal-line__title">
+                                                      <p>
+                                                        <span>{{ line.title }}</span>
+                                                      </p>
+                                                    </td>
+                                                    <td class="subtotal-line__value">
+                                                      <strong>{{ line.price | money }}</strong>
+                                                    </td>
+                                                  </tr>
+                                                  {% endfor %}
+                                                </table>
+                                                <table class="row subtotal-table subtotal-table--total">
+                                                  <tr class="subtotal-line">
+                                                    <td class="subtotal-line__title">
+                                                      <p>
+                                                        <span>Total</span>
+                                                      </p>
+                                                    </td>
+                                                    <td class="subtotal-line__value">
+                                                      <strong>{{ total_price | money_with_currency }}</strong>
+                                                    </td>
+                                                  </tr>
+                                                </table>
+                                                {% if my_variable == true %}
+                                                <table class="row section">
+                                                  <tr>
+                                                    <td class="section__cell">
+                                                      <center>
+                                                        <table class="container">
+                                                          <tr>
+                                                            <td>
+                                                              <h3>Información para el depósito</h3>
+                                                            </td>
+                                                          </tr>
+                                                        </table>
+                                                        <table class="row">
+                                                          <tr>
+                                                            <h4>Banco: BBVA Bancomer</h4>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <h4>No. de cuenta: 0104956621</h4>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <h4>No. de cuenta CLABE: 012580001049566216</h4>
                                         </td>
                                       </tr>
                                       <tr>
-                                        <h4>No. de cuenta: 0104956621</h4>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <h4>No. de cuenta CLABE: 012580001049566216</h4>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <h4>A nombre de: Mercadro SA de CV</h4>
-                                  </td>
-                                </tr>
-                              </table>
-                              {% endif %}
-                              {% assign transaction_size = 0 %}
-                              {% for transaction in transactions %}
-                              {% unless transaction.kind == "capture" or transaction.kind == "void" %}
-                              {% assign transaction_size = transaction_size | plus: 1 %}
-                              {% endunless %}
-                              {% endfor %}
-                              {% if transaction_size > 1 %}
-                              <table class="row subtotal-table">
-                                <tr>
-                                  <td colspan="2" class="subtotal-table__line"></td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2" class="subtotal-table__small-space"></td>
-                                </tr>
-                                {% for transaction in transactions %}
-                                {% if transaction.kind == "authorization" or transaction.kind == "sale" %}
-                                {% if transaction.payment_details.credit_card_company %}
-                                {% capture transaction_name %}{{ transaction.payment_details.credit_card_company }} (ending in {{ transaction.payment_details.credit_card_last_four_digits }}){% endcapture %}
-                                {% else %}
-                                {% capture transaction_name %}{{ transaction.gateway | replace: "_", " " | capitalize }}{% endcapture %}
-                                {% endif %}
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>{{transaction_name}}</span>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>{{ transaction.amount | money }}</strong>
-                                  </td>
-                                </tr>
-                                {% endif %}
-                                {% if transaction.kind == 'refund' %}
-                                {% if transaction.payment_details.credit_card_company %}
-                                {% assign refund_method_title = transaction.payment_details.credit_card_company %}
-                                {% else %}
-                                {% assign refund_method_title = transaction.gateway %}
-                                {% endif %}
-                                <tr class="subtotal-line">
-                                  <td class="subtotal-line__title">
-                                    <p>
-                                      <span>Refund</span>
-                                      <br>
-                                      <small>{{ refund_method_title | capitalize }}</small>
-                                    </p>
-                                  </td>
-                                  <td class="subtotal-line__value">
-                                    <strong>- {{ transaction.amount | money }}</strong>
-                                  </td>
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                              </table>
-                              {% endif %}
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </center>
-              </td>
-            </tr>
-          </table>
-          <table class="row section">
-            <tr>
-              <td class="section__cell">
-                <center>
-                  <table class="container">
-                    <tr>
-                      <td>
-                        <h3>Información del cliente</h3>
-                      </td>
-                    </tr>
-                  </table>
-                  <table class="container">
-                    <tr>
-                      <td>
-                        <table class="row">
-                          <tr>
-                            {% if requires_shipping and shipping_address %}
-                            <td class="customer-info__item">
-                              <h4>Dirección de envío</h4>
-                              <p>
-                                {{ shipping_address.name }}<br/>
-                                {{ shipping_address.address1 }}
-                                {% if shipping_address.address2 %}
-                                <br/>
-                                {{ shipping_address.address2 }}
-                                {% endif %}
-                                <br/>
-                                {{ shipping_address.city }}, {{ shipping_address.province }} {{ shipping_address.zip }}
-                              </p>
-                            </td>
+                                        <h4>A nombre de: Mercadro SA de CV</h4>
+                                </td>
+                              </tr>
+                            </table>
                             {% endif %}
-                            {% if billing_address %}
-                            <td class="customer-info__item">
-                              <h4>Dirección de la forma de pago elegida</h4>
-                              <p>
-                                {{ billing_address.name }}<br/>
-                                {{ billing_address.address1 }}
-                                {% if billing_address.address2 %}
-                                <br/>
-                                {{ billing_address.address2 }}
-                                {% endif %}
-                                <br/>
-                                {{ billing_address.city }}, {{ billing_address.province }} {{ billing_address.zip }}
-                              </p>
-                            </td>
-                            {% endif %}
-                          </tr>
-                        </table>
-                        <table class="row">
-                          <tr>
-                            <td class="customer-info__item">
-                              <h4>Método de envío</h4>
-                              <p>{{ shipping_method.title }}</p>
-                            </td>
-                            <td class="customer-info__item">
-                              <h4>Forma de pago
-(Para pagos con tarjeta en el estado de cuenta aparece como CONEKTA*MYEBOOKS)</h4>
+                            {% assign transaction_size = 0 %}
+                            {% for transaction in transactions %}
+                            {% unless transaction.kind == "capture" or transaction.kind == "void" %}
+                            {% assign transaction_size = transaction_size | plus: 1 %}
+                            {% endunless %}
+                            {% endfor %}
+                            {% if transaction_size > 1 %}
+                            <table class="row subtotal-table">
+                              <tr>
+                                <td colspan="2" class="subtotal-table__line"></td>
+                              </tr>
+                              <tr>
+                                <td colspan="2" class="subtotal-table__small-space"></td>
+                              </tr>
                               {% for transaction in transactions %}
                               {% if transaction.kind == "authorization" or transaction.kind == "sale" %}
-                              <p class="customer-info__item-content">
-                                {% if transaction.payment_details.credit_card_company %}
-                                {% capture credit_card_url %}notifications/{{ transaction.payment_details.credit_card_company | downcase }}.png{% endcapture %}
-                                <img src="{{ credit_card_url | shopify_asset_url }}" class="customer-info__item-credit">
-                                <span>Ending in {{ transaction.payment_details.credit_card_last_four_digits }} — <strong>{{ total_price | money_with_currency }}</strong></span>
-                                {% else %}
-                                {{ transaction.gateway | replace: "_", " " | capitalize }} 
-                                {% endif %}
-                              </p>
+                              {% if transaction.payment_details.credit_card_company %}
+                              {% capture transaction_name %}{{ transaction.payment_details.credit_card_company }} (ending in {{
+                              transaction.payment_details.credit_card_last_four_digits }}){% endcapture %}
+                              {% else %}
+                              {% capture transaction_name %}{{ transaction.gateway | replace: "_", " " | capitalize }}{% endcapture %}
+                              {% endif %}
+                              <tr class="subtotal-line">
+                                <td class="subtotal-line__title">
+                                  <p>
+                                    <span>{{transaction_name}}</span>
+                                  </p>
+                                </td>
+                                <td class="subtotal-line__value">
+                                  <strong>{{ transaction.amount | money }}</strong>
+                                </td>
+                              </tr>
+                              {% endif %}
+                              {% if transaction.kind == 'refund' %}
+                              {% if transaction.payment_details.credit_card_company %}
+                              {% assign refund_method_title = transaction.payment_details.credit_card_company %}
+                              {% else %}
+                              {% assign refund_method_title = transaction.gateway %}
+                              {% endif %}
+                              <tr class="subtotal-line">
+                                <td class="subtotal-line__title">
+                                  <p>
+                                    <span>Refund</span>
+                                    <br>
+                                    <small>{{ refund_method_title | capitalize }}</small>
+                                  </p>
+                                </td>
+                                <td class="subtotal-line__value">
+                                  <strong>- {{ transaction.amount | money }}</strong>
+                                </td>
+                              </tr>
                               {% endif %}
                               {% endfor %}
+                            </table>
+                            {% endif %}
                             </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </center>
-              </td>
-            </tr>
-          </table>
-          <table class="row footer">
-            <tr>
-              <td class="footer__cell">
-                <center>
-                  <table class="container">
-                    <tr>
-                      <td>
-                        <p class="disclaimer__subtext">Si tienes dudas, recuerda que puedes responder a este mensaje, nuestro correo es: <a href="mailto:{{ shop.email }}">{{ shop.email }}</a></p>
-                      </td>
-                    </tr>
-                  </table>
-                </center>
-              </td>
-            </tr>
-          </table>
-          <img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer"/>
-        </td>
-      </tr>
-    </table>
-  </body>
-</html>
+                            </tr>
+                            </table>
+                            </td>
+                            </tr>
+                            </table>
+                            </center>
+                            </td>
+                            </tr>
+                            </table>
+                            <table class="row section">
+                              <tr>
+                                <td class="section__cell">
+                                  <center>
+                                    <table class="container">
+                                      <tr>
+                                        <td>
+                                          <h3>Información del cliente</h3>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <table class="container">
+                                      <tr>
+                                        <td>
+                                          <table class="row">
+                                            <tr>
+                                              {% if requires_shipping and shipping_address %}
+                                              <td class="customer-info__item">
+                                                <h4>Dirección de envío</h4>
+                                                <p>
+                                                  {{ shipping_address.name }}<br />
+                                                  {{ shipping_address.address1 }}
+                                                  {% if shipping_address.address2 %}
+                                                  <br />
+                                                  {{ shipping_address.address2 }}
+                                                  {% endif %}
+                                                  <br />
+                                                  {{ shipping_address.city }}, {{ shipping_address.province }} {{ shipping_address.zip }}
+                                                </p>
+                                              </td>
+                                              {% endif %}
+                                              {% if billing_address %}
+                                              <td class="customer-info__item">
+                                                <h4>Dirección de la forma de pago elegida</h4>
+                                                <p>
+                                                  {{ billing_address.name }}<br />
+                                                  {{ billing_address.address1 }}
+                                                  {% if billing_address.address2 %}
+                                                  <br />
+                                                  {{ billing_address.address2 }}
+                                                  {% endif %}
+                                                  <br />
+                                                  {{ billing_address.city }}, {{ billing_address.province }} {{ billing_address.zip }}
+                                                </p>
+                                              </td>
+                                              {% endif %}
+                                            </tr>
+                                          </table>
+                                          <table class="row">
+                                            <tr>
+                                              <td class="customer-info__item">
+                                                <h4>Método de envío</h4>
+                                                <p>{{ shipping_method.title }}</p>
+                                              </td>
+                                              <td class="customer-info__item">
+                                                <h4>Forma de pago
+                                                  (Para pagos con tarjeta en el estado de cuenta aparece como CONEKTA*MYEBOOKS)</h4>
+                                                {% for transaction in transactions %}
+                                                {% if transaction.kind == "authorization" or transaction.kind == "sale" %}
+                                                <p class="customer-info__item-content">
+                                                  {% if transaction.payment_details.credit_card_company %}
+                                                  {% capture credit_card_url %}notifications/{{ transaction.payment_details.credit_card_company |
+                                                  downcase }}.png{% endcapture %}
+                                                  <img src="{{ credit_card_url | shopify_asset_url }}" class="customer-info__item-credit">
+                                                  <span>Ending in {{ transaction.payment_details.credit_card_last_four_digits }} — <strong>{{
+                                                      total_price | money_with_currency }}</strong></span>
+                                                  {% else %}
+                                                  {{ transaction.gateway | replace: "_", " " | capitalize }}
+                                                  {% endif %}
+                                                </p>
+                                                {% endif %}
+                                                {% endfor %}
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </center>
+                                </td>
+                              </tr>
+                            </table>
+                            <table class="row footer">
+                              <tr>
+                                <td class="footer__cell">
+                                  <center>
+                                    <table class="container">
+                                      <tr>
+                                        <td>
+                                          <p class="disclaimer__subtext">Si tienes dudas, recuerda que puedes responder a este mensaje, nuestro
+                                            correo es: <a href="mailto:{{ shop.email }}">{{ shop.email }}</a></p>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </center>
+                                </td>
+                              </tr>
+                            </table>
+                            <img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" />
+                            </td>
+                            </tr>
+                            </table>
+                            </body>
+                            
+                            </html>

@@ -85,6 +85,7 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                         <h2>{{ email_title }}</h2>
                         {% assign line_item = order.line_items[0]%}
                         {%capture student%}{{line_item.properties.Nombre}} {{line_item.properties.Apellido}} {%endcapture%}
+                        {%capture matricula%}{{line_item.properties.Matricula}}{%endcapture%}
                         {%capture parent%}{{order.billing_address.first_name}}{{order.billing_address.last_name}}<sup>*</sup>{%endcapture%}
                         <ul>
                           {% for line in order.line_items %}
@@ -109,6 +110,12 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                               <a target="_blank"
                                   href="https://mercadro-oficial.github.io/pruebaPDF/certificate_2023.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}&boleta={{boleta}}"
                                 >Descargar Certificado (IPN) - {{titulo}}</a>
+                            </li>
+                          {% elsif line.product.tags contains 'Donación de libros - CEPAI' %}
+                            <li>
+                              <a target="_blank"
+                                  href="https://mercadro-oficial.github.io/pruebaPDF/certificate_cepai.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&matricula={{matricula}}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}"
+                                >Descargar Certificado - {{titulo}}</a>
                             </li>
                           {% elsif line.product.tags contains 'McGraw-Hill-Cer' %}
                           <li>
