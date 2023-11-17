@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificado de Donación de Libro</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Kreon&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet" />
+  <style>
+    .strong-red {
+      color: #5f256f;
+      font-weight: bold;
+    }
+    .flexbox-parent {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 2em;
+    }
+
+    .flexbox-parent>img {
+      align-self: center;
+    }
+
+    body {
+      font-size: 81.25%;
+    }
+
+    #title {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-weight: unset;
+      font-size: 18px;
+      line-height: 1.8em;
+    }
+
+    .font-title,
+    li {
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    li {
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: left;
+      text-transform: uppercase;
+      color: #5f256f;
+    }
+
+    li+p {
+      font-size: 1.25em;
+      margin: 3px;
+      /* margin-bottom: 1em; */
+    }
+
+    .content {
+      /* margin: auto; */
+      margin-top: 5em;
+      height: 70vh;
+    }
+
+    .subtitle {
+      color: #5f256f;
+      font-size: 1.3em;
+      text-transform: none;
+      margin: 2em 0;
+    }
+
+    .privacy-warning {
+      font-size: xx-small;
+      text-justify: auto;
+    }
+
+    #stop-img {
+      height: 7em;
+      position: fixed;
+      right: 7vw;
+    }
+
+    #vigencia {
+      text-align: center;
+    }
+
+    @media print {
+
+      html,
+      body {
+        height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+      }
+    }
+    @page {
+      size: auto;
+      /* auto is the initial value */
+      margin: 0mm;
+      /* this affects the margin in the printer settings */
+    }
+    html {
+      background-color: #FFFFFF;
+      margin: 0px;
+      /* this affects the margin on the html before sending to printer */
+    }
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      /* border: solid 1px blue; */
+      margin: 10mm 15mm 10mm 15mm;
+      /* margin you want for the content */
+    }
+    footer {
+      margin: 3em;
+      margin-top: 13em;
+      font-size: 0.6em; 
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <header class="flexbox-parent" style="margin: 2em">
+      <img
+        src="/docs/logos/UPMH.jpeg"
+        style="width: 34vw;"
+        alt="UPMH Logo"
+      />
+      <img
+        src="/docs/logos/myebooks.png"
+        style="height: 4em;padding-left: 5em;margin-top: 2em;"
+        alt="Myebooks Logo"
+      />
+    </header>
+    <h1 id="title" class="font-title">
+      <span class="strong-red" style="color: #941471; font-size: 1.4em;">Certificado de donación de libro</span> <br>
+      Vigencia 12 meses
+    </h1>
+    
+    <ul style="margin-left: 8em;">
+      <li>Institución</li>
+      <p id="institucion">
+        {{institucion}}
+      </p>
+      <li>Nombre del estudiante</li>
+      <p id="nombre">
+        {{nombre_estudiante}}
+      </p>
+      <li>Matrícula</li>
+      <p id="matricula">
+        {{matricula}}
+      </p>
+      <li>Fecha</li>
+      <p id="fecha">
+        {{fecha_compra}}
+      </p>
+      <li>Titulo</li>
+      <p id="titulo">
+        {{libro_titulo}}
+      </p>
+      <li>Edicion</li>
+      <p id="edicion">
+        {{libro_edicion}}
+      </p>
+      <li>Autor</li>
+      <p id="autor">
+        {{libro_autor}}
+      </p>
+      <li>ISBN</li>
+      <p id="isbn">
+        {{libro_isbn}}
+      </p>
+      <li>Número de Orden</li>
+      <p id="orden">
+        {{identificador_compra}}
+      </p>
+    </ul>
+    <h1 class="font-title subtitle">
+      Imprime este certificado y preséntalo en la biblioteca de <br> la institución
+    </h1>
+    <footer>
+      <hr>
+      <p>
+        Los datos personales que usted nos proporcione, serán utilizados para formar una base de datos que permanecerá vigente durante el tiempo que Mercadro esté operando Myebooks y que preste sus servicios
+        tales como la distribución de libros en todos sus formatos, especialmente libros electrónicos, descargables y no descargables así como cualquier otro en cumplimento de su objeto social. Myebooks se reserva el
+        derecho de compartir sus datos personales con sus empleados, proveedores calificados, socios así como con sus asesores, quienes tratarán su información por cuenta de Myebooks en cumplimiento con el
+        presente Aviso de Privacidad. Myebooks no compartirá o transferirá sus datos personales a terceros salvo en los casos previstos en la Ley Federal de Protección de Datos Personales en Posesión de los
+        Particulares o en cualquier otra legislación o reglamento aplicable.
+      </p>
+    </footer>
+  </div>
+  <svg width="20000" height="100" style="position: fixed; bottom:0;left:0;">
+    <rect width="20000" height="100" style="fill:#5f256f" />
+  </svg>
+</body>
+<script>
+  window.onload = () => {
+    let url = new URL(window.location.href);
+    let institucion = "Universidad Politécnica Metropolitana de Hidalgo";
+    let nombre = url.searchParams.get("nombre")
+      ? url.searchParams.get("nombre")
+      : "N/A";
+    let matricula = url.searchParams.get("matricula")
+      ? url.searchParams.get("matricula")
+      : "N/A";
+    let titulo = url.searchParams.get("titulo")
+      ? url.searchParams.get("titulo")
+      : "N/A";
+    let edicion = url.searchParams.get("edicion")
+      ? url.searchParams.get("edicion")
+      : "N/A";
+    let autor = url.searchParams.get("autor")
+      ? url.searchParams.get("autor")
+      : "N/A";
+    let fecha = url.searchParams.get("fecha")
+      ? url.searchParams.get("fecha")
+      : "N/A";
+    let isbn = url.searchParams.get("isbn")
+      ? url.searchParams.get("isbn")
+      : "N/A";
+    let orden = url.searchParams.get("orden")
+      ? url.searchParams.get("orden")
+      : "N/A";
+
+    document.querySelector("#institucion").innerText = institucion;
+    document.querySelector("#nombre").innerText = nombre;
+    document.querySelector("#matricula").innerText = matricula;
+    document.querySelector("#fecha").innerText = fecha;
+    document.querySelector("#titulo").innerText = titulo;
+    document.querySelector("#edicion").innerText = edicion;
+    document.querySelector("#autor").innerText = autor;
+    document.querySelector("#isbn").innerText = isbn;
+    document.querySelector("#orden").innerText = orden;
+
+    window.print();
+  };
+</script>
+
+</html>
