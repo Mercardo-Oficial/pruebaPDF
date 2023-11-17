@@ -108,7 +108,7 @@ Si compraste con nosotros un producto digital, se te enviará en un correo apart
                             {%capture carrera%}{{line_item.properties.carrera}}{%endcapture%}
                             <li>
                               <a target="_blank"
-                                  href="https://mercadro-oficial.github.io/pruebaPDF/certificate_upmh.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&matricula={{matricula}}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}"
+                                  href="https://mercadro-oficial.github.io/pruebaPDF/certificate_upmh.html?nombre={%if student.size > 3%}{{student}}{%else%}{{parent}}{%endif%}&fecha={{ order.created_at | date: "%d/%m/%Y" }}&matricula={{matricula}}&carrera={{carrera}}&titulo={{titulo}}&autor={{autor}}&isbn={{ line.sku | split:'_' | first | default:"N/D" }}&orden={{order.name | split:'#' | last}}&edicion={{edicion}}"
                                 >Descargar Certificado - {{titulo}}</a>
                             </li>
                           {% elsif line.product.tags contains 'Donacion de libros IPN' %}
